@@ -1,107 +1,87 @@
 const User = require("../model/user");
 
-module.exports = {
-  insert(req, res) {
-    //desestruturação do que vier do body
-    const { identificador, nome, nome_de_usuario, senha } = req.body;
+async function insert(req, res) {
+  const { identificador, nome, nome_de_usuario, senha } = req.body;
 
-    //procura na base pra ver se não tem usuario com mesmo identificador
-    try {
-      User.findOne({ identificador }, (err, user) => {
-        if (err) {
-          return res.status(500).send({ erro_na_procura: err });
-        }
-        if (user) {
-          return res
-            .status(400)
-            .send({ errors: "usuario ja cadastrado", data: user });
-        } else {
-          const user = new User({
-            identificador,
-            nome,
-            nome_de_usuario,
-            senha,
-          });
+  try {
+    const haveUser = await User.findOne({ identificador });
+    if (haveUser != null) {
+      return res.status(400);
+    } else {
+      try {
+        const user = await User.create({
+          identificador,
+          nome,
+          nome_de_usuario,
+          senha,
+        });
 
-          try {
-            user.save((err, user) => {
-              if (err) {
-                return res.status(500).send({ erro_na_insercao: err });
-              } else {
-                res.status(200).json({
-                  success: "usuario inserido com sucesso",
-                  usuario: user,
-                });
-              }
-            });
-          } catch (error) {
-            res.json({
-              success: false,
-              erro: error,
-            });
-          }
-        }
-      });
-    } catch (error) {
-      res.json({
-        erros: false,
-        erro: error,
-      });
+        res.status(201).json(user);
+      } catch (error) {
+        res.json(error);
+      }
     }
-  },
+  } catch (error) {
+    res.json(error);
+  }
+}
 
-  async read(req, res) {
-    const { identificador } = req.body;
+async function read(req, res) {
+  const { identificador } = req.body;
 
-    try {
-      const user = await User.findOne({ identificador });
+  try {
+    const user = await User.findOne({ identificador });
 
-      if (user) {
-        return res.status(500).send({ message: "Usuario não cadastrado!" });
-      } else {
-        return res.status(200).json({ usuario: user });
-      }
-    } catch (error) {
-      res.json({
-        erro: error,
-      });
+    if (user === null) {
+      return res.status(500);
+    } else {
+      return res.status(200).json(user);
     }
-  },
-  async update(req, res) {
-    const { identificador, nome, nome_de_usuario, senha } = req.body;
-
-    const naovazios = {};
-
-    if (nome != undefined) naovazios.nome = nome;
-    if (nome_de_usuario != undefined)
-      naovazios.nome_de_usuario = nome_de_usuario;
-    if (senha != undefined) naovazios.senha = senha;
-    console.log(naovazios);
-
-    await User.findOneAndUpdate(
-      { identificador },
-      naovazios,
-      { new: true, runValidators: true },
-      (err, user) => {
-        if (err) {
-          return res.status(500).send({ erro: err });
-        }
-        if (user) {
-          return res.status(200).json({ usuario: user });
-        }
-      }
-    );
-  },
-  async destroy(req, res) {
-    const { identificador } = req.body;
-    await User.findOneAndDelete({ identificador }, (err) => {
-      if (err) {
-        return res.status(500).send({ erro: err });
-      } else {
-        return res
-          .status(200)
-          .json({ message: "usuario excluido com sucesso!" });
-      }
+  } catch (error) {
+    res.status(500).json({
+      erro: error,
     });
-  },
-};
+  }
+}
+
+async function update(req, res) {
+  const { identificador, nome, nome_de_usuario, senha } = req.body;
+
+  const naovazios = {};
+
+  if (nome != "") naovazios.nome = nome;
+  if (nome_de_usuario != "") naovazios.nome_de_usuario = nome_de_usuario;
+  if (senha != "") naovazios.senha = senha;
+
+  try {
+    const haveUser = await User.findOne({ identificador });
+    if (haveUser != null) {
+      const user = await User.updateOne({ identificador }, naovazios, {
+        new: true,
+      });
+      return res.status(200).json(user);
+    } else {
+      return res.status(500);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function destroy(req, res) {
+  const { identificador } = req.body;
+
+  try {
+    const haveUser = await User.findOne({ identificador });
+
+    if (haveUser != null) {
+      const user = await User.deleteOne({ identificador });
+
+      return res.status(200).json(user);
+    } else {
+      return res.status(200).json(haveUser);
+    }
+  } catch (error) {}
+}
+
+module.exports = { insert, read, update, destroy };
