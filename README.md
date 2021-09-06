@@ -9,13 +9,13 @@
 <h1 align="center">Api em Nodejs com MongoDB</h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/{{YOUR_GITHUB_USERNAME}}/hvex?color=56BEB8">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/ewertho/hvex?color=56BEB8">
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/{{YOUR_GITHUB_USERNAME}}/hvex?color=56BEB8">
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/ewertho/hvex?color=56BEB8">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/{{YOUR_GITHUB_USERNAME}}/hvex?color=56BEB8">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/ewertho/hvex?color=56BEB8">
 
-  <img alt="License" src="https://img.shields.io/github/license/{{YOUR_GITHUB_USERNAME}}/hvex?color=56BEB8">
+  <img alt="License" src="https://img.shields.io/github/license/ewertho/hvex?color=56BEB8">
 
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{YOUR_GITHUB_USERNAME}}/hvex?color=56BEB8" /> -->
 
@@ -45,19 +45,18 @@
 
 ## :dart: <div id="sobre"> Sobre</div>
 
-Projeto feito para o processo seletivo da empresa HVEX com o intuito de testar os conhecimentos em Api, Banco de dados não relacional (NoSQL), padrão Rest e nas linguagem Nodejs
+Projeto feito para o processo seletivo da empresa HVEX com o intuito de testar os conhecimentos em Api, Banco de dados não relacional (NoSQL), padrão Rest e nas linguagem Nodejs.
 
 ## :rocket: <div id="tecnologias"> Tecnologias</div>
 
 Nesse projeto foram utilizadas:
 
 - [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
 - [MongoDB](https://www.mongodb.com/pt-br)
 
 ## :white_check_mark:<div id="requerimentos"> Requerimentos</div>
 
-Antes de iniciar :checkered_flag:, você precisara ter: [MongoDB](https://www.mongodb.com/pt-br) no minimo na versão 4, [Node](https://nodejs.org/en/) no minimo na versão 10 e [React](https://pt-br.reactjs.org/) no minimo na versão 16.
+Antes de iniciar :checkered_flag:, você precisara ter: uma conexão a internet, [MongoDB](https://www.mongodb.com/pt-br) no minimo na versão 4 e [Node](https://nodejs.org/en/) no minimo na versão 10.
 
 ## :checkered_flag: <div id="iniciando"> Iniciando</div>
 
